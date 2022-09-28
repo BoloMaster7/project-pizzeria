@@ -1,8 +1,6 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-
 {
   'use strict';
-
   const select = {
     templateOf: {
       menuProduct: '#template-menu-product',
@@ -32,14 +30,12 @@
       },
     },
   };
-
   const classNames = {
     menuProduct: {
       wrapperActive: 'active',
       imageVisible: 'active',
     },
   };
-
   const settings = {
     amountWidget: {
       defaultValue: 1,
@@ -47,15 +43,12 @@
       defaultMax: 9,
     }
   };
-
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
-
   class Product {
     constructor(id, data) {
       const thisProduct = this;
-
       thisProduct.id = id;
       thisProduct.data = data;
 
@@ -69,7 +62,6 @@
     }
     renderInMenu() {
       const thisProduct = this;
-
       /*generate HTML based on template */
       const generatedHTML = templates.menuProduct(thisProduct.data);
       /*create element usign utils.createElementFromHTML  */
@@ -149,58 +141,55 @@
 
         // for every option in this category
         for (let optionId in param.options) {
+          console.log('This is optionId', optionId);
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
+          const selected = formData[paramId].includes(optionId);
           console.log(optionId, option);
-
+          console.log(selected);
           // check if there is param with a name of paramId in formData and if it includes optionId
           if (formData[paramId] && formData[paramId].includes(optionId)) {
             // check if the option is not default
-            if (????) {
+            if (option != param.options.default) {
               // add option price to price variable
-            }
-          } else {
-            // check if the option is default
-            if (????) {
+              price = price + option.price;
+
+              // check if the option is default
+            } else if (option == param.options.default) {
               // reduce price variable
+              price = price - option.price;
             }
           }
-
-          // update calculated price in the HTML
-          thisProduct.priceElem.innerHTML = price;
         }
       }
+      // update calculated price in the HTML
+      thisProduct.priceElem.innerHTML = price;
 
-
-
-      const app = {
-        initMenu: function () {
-          const thisApp = this;
-          console.log('thisApp.data', thisApp.data);
-
-          for (let productData in thisApp.data.products) {
-            new Product(productData, thisApp.data.products[productData]);
-          }
-        },
-
-        initData: function () {
-          const thisApp = this;
-
-          thisApp.data = dataSource;
-        },
-
-        init: function () {
-          const thisApp = this;
-          console.log('*** App starting ***');
-          console.log('thisApp:', thisApp);
-          console.log('classNames:', classNames);
-          console.log('settings:', settings);
-          console.log('templates:', templates);
-          thisApp.initData();
-          thisApp.initMenu();
-        },
-      };
-
-
-      app.init();
     }
+  }
+
+  const app = {
+    initMenu: function () {
+      const thisApp = this;
+      console.log('thisApp.data', thisApp.data);
+      for (let productData in thisApp.data.products) {
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
+    initData: function () {
+      const thisApp = this;
+      thisApp.data = dataSource;
+    },
+    init: function () {
+      const thisApp = this;
+      console.log('*** App starting ***');
+      console.log('thisApp:', thisApp);
+      console.log('classNames:', classNames);
+      console.log('settings:', settings);
+      console.log('templates:', templates);
+      thisApp.initData();
+      thisApp.initMenu();
+    },
+  };
+  app.init();
+}
