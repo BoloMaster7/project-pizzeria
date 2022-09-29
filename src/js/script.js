@@ -130,6 +130,13 @@
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
 
+      /*
+      {
+        sauce: ['tomato'],
+        toppings: ['olives', 'redPepers', 'Mushrooms'],
+        crust: ['standard']
+      }
+      */
       // set price to default price
       let price = thisProduct.data.price;
 
@@ -144,35 +151,38 @@
           console.log('This is optionId', optionId);
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          const selected = formData[paramId].includes(optionId);
-          console.log('test123', optionId, option);
-          console.log(selected);
+
           // check if there is param with a name of paramId in formData and if it includes optionId
           if (formData[paramId] && formData[paramId].includes(optionId)) {
+
             // check if the option is not default
-            if (option != param.options.default) {
+            if (!option.default) {
               // add option price to price variable
               price = price + option.price;
-
-              // check if the option is default
-            } else if (option == param.options.default) {
+            }
+          } else {
+            if (option.default) {
               // reduce price variable
               price = price - option.price;
             }
           }
+
           //searching correct imgae
           //const optionImage = thisProduct.imageWrapper.querySelector('.paramId-optionId'); dlaczego ten sposob nie dziala?
           const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
           console.log('test image', optionImage);
           //check if option is selected
           const optionselected = formData[paramId] && formData[paramId].includes(optionId);
-          if (optionImage && optionselected) {
-            //make image class active
-            optionImage.classList.add(classNames.menuProduct.imageVisible);
+
+          if (optionImage) {
+            if (optionselected) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            }
+            else {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
           }
-          /* else {
-             optionImage.classList.remove(classNames.menuProduct.imageVisible);
-           }*/
+
         }
       }
       // update calculated price in the HTML
