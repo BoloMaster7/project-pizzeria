@@ -206,6 +206,7 @@
 
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value);
+      thisWidget.initActions();
     }
     getElements(element) {
       const thisWidget = this;
@@ -226,6 +227,25 @@
       }
       thisWidget.input.value = thisWidget.value;
     }
+    initActions() {
+      const thisWidget = this;
+      thisWidget.input.addEventListener('change', function () {
+        thisWidget.setValue(thisWidget.input.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click', function (event) {
+        event.preventDefault();
+        if ((thisWidget.value <= 10) && (thisWidget.value > 0)) {
+          thisWidget.setValue(thisWidget.value -= 1);
+        }
+      });
+      thisWidget.linkIncrease.addEventListener('click', function (event) {
+        event.preventDefault();
+        if ((thisWidget.value < 10) && (thisWidget.value >= 0)) {
+          thisWidget.setValue(thisWidget.value += 1);
+        }
+      });
+    }
+
   }
 
   const app = {
