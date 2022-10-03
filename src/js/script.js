@@ -39,8 +39,8 @@
   const settings = {
     amountWidget: {
       defaultValue: 1,
-      defaultMin: 1,
-      defaultMax: 9,
+      defaultMin: 0,
+      defaultMax: 10,
     }
   };
   const templates = {
@@ -221,21 +221,32 @@
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
+
     setValue(value) {
       const thisWidget = this;
 
       const newValue = parseInt(value);
+      const minValue = settings.amountWidget.defaultMin;
+      const maxValue = settings.amountWidget.defaultMax;
 
-      /*TODO Add validation */
+      thisWidget.value = settings.amountWidget.defaultValue;
+      /* Add validation */
       if (thisWidget.value !== newValue && !isNaN(newValue)) {
         thisWidget.value = newValue;
       }
+      if (thisWidget.value < minValue) {
+        thisWidget.value = minValue;
+      }
+      if (thisWidget.value > maxValue) {
+        thisWidget.value = maxValue;
+      }
 
-      //thisWidget.input.value = thisWidget.value;
-      thisWidget.input.value = settings.amountWidget.defaultValue;
 
-      thisWidget.announce();
+      thisWidget.input.value = thisWidget.value;
+
+      this.announce();
     }
+
     initActions() {
       const thisWidget = this;
       thisWidget.input.addEventListener('change', function () {
@@ -254,6 +265,7 @@
         }
       });
     }
+
     announce() {
       const thisWidget = this;
 
