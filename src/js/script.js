@@ -243,10 +243,11 @@
       const thisProduct = this;
       const productSummary = {
         id: thisProduct.id,
-        name: thisProduct.name,
-        amount: thisProduct.amount,
+        name: thisProduct.data.name,
+        amount: thisProduct.amountWidget.value,
         priceSingle: thisProduct.priceSingle,
-        price: thisProduct.amountWidget.value * thisProduct.priceSingle
+        price: thisProduct.amountWidget.value * thisProduct.priceSingle,
+        params: thisProduct.prepareCartProductParams()
 
       };
       return productSummary;
@@ -255,7 +256,7 @@
       const thisProduct = this;
 
       app.cart.add(thisProduct);
-      app.cart.add(thisProduct.prepareCartProduct);
+      app.cart.add(thisProduct.prepareCartProduct());
     }
     prepareCartProductParams() {
       const thisProduct = this;
@@ -391,7 +392,7 @@
       const thisCart = this;
 
       /*generate HTML based on template */
-      const generatedHTML = templates.cartProduct(thisCart.data);
+      const generatedHTML = templates.cartProduct(menuProduct);
       /*create element usign utils.createElementFromHTML */
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       /*add DOM element */
@@ -403,7 +404,7 @@
       console.log('thisCart.products', thisCart.products);
     }
   }
-  class CartProduct {
+  /* class CartProduct {
     constructor(menuProduct, element) {
       const thisCartProduct = this;
 
@@ -426,7 +427,7 @@
 
     }
   }
-
+  */
   const app = {
     initMenu: function () {
       const thisApp = this;
