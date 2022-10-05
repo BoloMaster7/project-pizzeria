@@ -400,11 +400,11 @@
 
 
       console.log('adding product', menuProduct);
-      thisCart.products.push(menuProduct);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       console.log('thisCart.products', thisCart.products);
     }
   }
-  /* class CartProduct {
+  class CartProduct {
     constructor(menuProduct, element) {
       const thisCartProduct = this;
 
@@ -415,6 +415,7 @@
     }
     getElements(element) {
       const thisCartProduct = this;
+
       thisCartProduct.dom = {
         wrapper: element,
         amountWidget: element.querySelector(select.cartProduct.amountWidget),
@@ -424,10 +425,20 @@
 
       };
 
-
     }
+    initAmountWidget() {
+      const thisCartProduct = this;
+
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function () {
+        thisCartProduct.amount = thisCartProduct.amountWidget;
+        thisCartProduct.price;
+      });
+    }
+
+
   }
-  */
+
   const app = {
     initMenu: function () {
       const thisApp = this;
