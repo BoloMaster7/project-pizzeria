@@ -262,8 +262,8 @@
     constructor(element) {
       const thisWidget = this;
 
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor arguments:', element);
+      //   console.log('AmountWidget:', thisWidget);
+      // console.log('constructor arguments:', element);
       //console.log('AmountWidget:', thisWidget);
       //console.log('constructor arguments:', element);
 
@@ -300,7 +300,6 @@
       });
       thisWidget.element.dispatchEvent(event);
     }
-
     initActions() {
       const thisWidget = this;
       thisWidget.input.addEventListener('change', function () {
@@ -324,9 +323,8 @@
       thisCart.getElements(element);
       thisCart.initActions(element);
 
-      console.log('new Cart', thisCart);
+      //console.log('new Cart', thisCart);
     }
-
     getElements(element) {
       const thisCart = this;
       thisCart.dom = {};
@@ -338,7 +336,6 @@
       thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelector(select.cart.totalPrice);
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
     }
-
     initActions() {
       const thisCart = this;
       thisCart.dom.toggleTrigger.addEventListener('click', function () {
@@ -353,7 +350,6 @@
         thisCart.remove(event.detail.cartProduct);
       });
     }
-
     add(menuProduct) {
       const thisCart = this;
       /* generate HTML based on template */
@@ -363,8 +359,7 @@
       /* add element */
 
       thisCart.dom.productList.appendChild(generatedDOM);
-
-      console.log('adding product', menuProduct);
+      //console.log('adding product', menuProduct);
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
 
       thisCart.update();
@@ -480,7 +475,7 @@
     initMenu: function () {
       const thisApp = this;
 
-      console.log('thisApp.data:', thisApp.data);
+      //console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
