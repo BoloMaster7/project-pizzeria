@@ -499,9 +499,9 @@
           console.log('parsedResponse', parsedResponse);
 
           /*save parsedResponse as thisApp.data.products */
-          parsedResponse = thisApp.data.products;
+          thisApp.data.products = parsedResponse;
           /*execute initMenu method */
-          app.initMenu();
+          thisApp.initMenu();
         });
       console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
