@@ -114,14 +114,6 @@ class Cart {
       payload.products.push(prod.getData());
     }
 
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload)
-    });
-
     const options = {
       method: 'POST',
       headers: {
@@ -129,9 +121,6 @@ class Cart {
       },
       body: JSON.stringify(payload),
     };
-
-    fetch(url, options);
-    console.log('payload', payload);
 
     fetch(url, options)
       .then(function (response) {
