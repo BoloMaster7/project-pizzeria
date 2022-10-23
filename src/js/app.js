@@ -1,6 +1,7 @@
 import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
+import Booking from './components/Booking.js';
 
 const app = {
   initPages: function () {
@@ -9,7 +10,18 @@ const app = {
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
 
-    thisApp.activatePage(thisApp.pages[0].id);
+    const idFromHash = window.location.hash.replace('#/', '');
+   
+    let pageMatchingHash = thisApp.pages[0].id;
+
+    for(let page of thisApp.pages){
+      if(page.id == idFromHash){
+        pageMatchingHash = page.id;
+        break;
+      }
+    }
+
+    thisApp.activatePage(pageMatchingHash);
 
     for (let link of thisApp.navLinks){
       link.addEventListener('click', function (event) {
@@ -21,6 +33,10 @@ const app = {
 
         /*  run thisApp.activatePage with that id*/
         thisApp.activatePage(id);
+
+        /*  change URL hash*/
+
+        window.location.hash = '#/' + id;
 
       });
     }
@@ -70,14 +86,6 @@ const app = {
       });
     console.log('thisApp.data', JSON.stringify(thisApp.data));
   },
-  init: function () {
-    const thisApp = this;
-
-    thisApp.initPages();
-
-    thisApp.initData();
-    thisApp.initCart();
-  },
   initCart: function () {
     const thisApp = this;
     const cartElem = document.querySelector(select.containerOf.cart);
@@ -87,7 +95,26 @@ const app = {
     thisApp.productList.addEventListener('add-to-cart', function (event) {
       app.cart.add(event.detail.product);
     });
+  },
+  initBooking: function(){
+    const thisApp = this;
 
-  }
+    const bookingElem = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(bookingElem);
+  },
+  init: function () {
+    const thisApp = this;
+
+    thisApp.initPages();
+    thisApp.initData();
+    thisApp.initCart();
+    thisApp.initBooking();
+
+  },
+  
+
 };
+
+
+
 app.init();
