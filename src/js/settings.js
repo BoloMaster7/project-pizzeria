@@ -25,7 +25,7 @@ export const select = {
   },
   widgets: {
     amount: {
-      input: 'input.amount', // CODE CHANGED
+      input: 'input.amount', 
       linkDecrease: 'a[href="#less"]',
       linkIncrease: 'a[href="#more"]',
     },
