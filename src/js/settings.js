@@ -38,14 +38,6 @@ export const select = {
       input: 'input[type="range"]',
       output: '.output',
     },
-    booking: {
-      peopleAmount: '.people-amount',
-      hoursAmount: '.hours-amount',
-      tables: '.floor-plan .table',
-    },
-    nav: {
-      links: '.main-nav a',
-    },
   },
   // CODE ADDED START
   cart: {
@@ -66,6 +58,14 @@ export const select = {
     price: '.cart__product-price',
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
+  },
+  booking: {
+    peopleAmount: '.people-amount',
+    hoursAmount: '.hours-amount',
+    tables: '.floor-plan .table',
+  },
+  nav: {
+    links: '.main-nav a',
   },
   // CODE ADDED END
 };
@@ -106,7 +106,7 @@ export const settings = {
     url: '//localhost:3131',
     products: 'products',
     orders: 'orders',
-    product: 'product',
+    // product: 'product',
     order: 'order',
     booking: 'booking',
     event: 'event',
