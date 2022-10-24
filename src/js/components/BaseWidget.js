@@ -5,43 +5,46 @@ class BaseWidget{
     thisWidget.dom = {};
     thisWidget.dom.wrapper = wrapperElement;
 
-    thisWidget.CorrectValue= initialValue;
-  }
-  get Value(){
-    const thisWidget = this;
-
-    return thisWidget.CorrectValue;
+    thisWidget.correctValue = initialValue;
   }
 
-  set Value(value) {
+  get value(){
     const thisWidget = this;
 
+    return thisWidget.correctValue;
+  }
+
+  set value(value){
+    const thisWidget = this;
     const newValue = thisWidget.parseValue(value);
-   
-    if ((newValue != thisWidget.CorrectValue  && !isNaN(newValue)) && thisWidget.isValid(newValue)) {
-      thisWidget.CorrectValue = newValue;
+    if (newValue != thisWidget.correctValue && thisWidget.isValid(value)) {
+      thisWidget.correctValue = newValue;
       thisWidget.announce();
     }
     thisWidget.renderValue();
-
   }
 
   setValue(value){
     const thisWidget = this;
+
     thisWidget.value = value;
   }
+
   parseValue(value){
     return parseInt(value);
   }
+
   isValid(value){
     return !isNaN(value);
   }
+
   renderValue(){
     const thisWidget = this;
 
-    thisWidget.dom.wrapper.innerHTML= thisWidget.value;
+    thisWidget.dom.wrapper.innerHTML = thisWidget.value;
   }
-  announce() {
+
+  announce(){
     const thisWidget = this;
 
     const event = new CustomEvent('updated', {
@@ -50,4 +53,5 @@ class BaseWidget{
     thisWidget.dom.wrapper.dispatchEvent(event);
   }
 }
+
 export default BaseWidget;
