@@ -8,6 +8,8 @@ class Booking{
 
   constructor(element){
     const thisBooking = this;
+
+    thisBooking.selectedTable = [];
     
     thisBooking.render(element);
     thisBooking.initWidgets();
