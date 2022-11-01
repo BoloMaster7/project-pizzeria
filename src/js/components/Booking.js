@@ -167,6 +167,11 @@ class Booking{
     thisBooking.dom.allTables = thisBooking.dom.wrapper.querySelector(select.booking.allTables);
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
+    thisBooking.dom.phoneNumber = thisBooking.dom.wrapper.querySelector(select.cart.phone);
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.cart.address);
+    thisBooking.dom.SelectedStarters = thisBooking.dom.wrapper.querySelector(select.cart.starters);
+    thisBooking.dom.starters = [];
+    thisBooking.dom.bookTable = thisBooking.dom.wrapper.querySelector(select.booking.bookButton);
   }
 
   initWidgets(){
@@ -195,8 +200,32 @@ class Booking{
       const clickedElement = event.target;
       if (clickedElement.classList.contains('table'))
         thisBooking.initTables(clickedElement);
-     
     });
+
+    thisBooking.dom.SelectedStarters.addEventListener('click', function(event){
+      const starter = event.target;
+
+      thisBooking.dom.bookTable.addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisBooking.sendBooking();
+      });
+  
+      if(
+        starter.getAttribute('type') == 'checkbox' && starter.getAttribute('name') == 'starter' 
+      ) {
+        if (starter.checked) {
+          thisBooking.starters.push(starter.value);
+          console.log(thisBooking.starters);
+        } else if (!starter.checked) {
+          const starterId = thisBooking.starters.indexOf(starter.value);
+          thisBooking.starters.splice(starterId, 1);
+          console.log(starter.value);
+        }
+      }
+    });
+
+  
+
   }
   initTables(clickedElement) {
     const thisBooking = this;
@@ -218,6 +247,32 @@ class Booking{
         thisBooking.selectedTable = tableId;
       }
     }
+  }
+  sendBooking() {
+    const thisBooking = this;
+    const url = settings.db.url + '/' + settings.db.orders;
+
+    const payload = {
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.HourPicker.value,
+      table: thisBooking.selectedTable,
+      duration: parseInt(thisBooking.hoursAmount.value),
+      ppl: parseInt(thisBooking.peopleAmount.value),
+      starters: thisBooking.starters,
+      phone: thisBooking.dom.phoneNumber,
+      address:  thisBooking.dom.address,
+    };
+    
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options);
+    thisBooking.updateDOM();
   }
 }
 

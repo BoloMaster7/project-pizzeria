@@ -52,6 +52,7 @@ export const select = {
     formSubmit: '.cart__order [type="submit"]',
     phone: '[name="phone"]',
     address: '[name="address"]',
+    starters: '.checkbox',
   },
   cartProduct: {
     amountWidget: '.widget-amount',
@@ -65,6 +66,7 @@ export const select = {
     tables: '.floor-plan .table',
     allTables: '.floor-plan',
     tableSelected: '.table.selected',
+    bookTable: '.booking-form',
   },
   nav: {
     links: '.main-nav a',
