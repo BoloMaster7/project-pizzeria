@@ -1,0 +1,94 @@
+.home-wrapper {
+  margin: auto;
+  background: $color-light;
+ max-width:  400px;
+ padding: 3px;
+}
+
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.links {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 120px;
+  gap: 10px;
+}
+  .link {
+    flex-grow: 1;
+    position: relative;
+    text-align: center;
+    flex-basis: 45%;
+  }
+  .opening-hours {
+    margin-top: 5px;
+    flex-basis: 45%;
+    flex-grow: 2px;
+    position: relative;
+    height: 140px;
+    background-color: $color-main;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: $color-light;
+    text-align: center;
+    padding-top: 2px;
+  }
+    .text {
+      text-align: center;    
+  }
+/* external css: flickity.css */
+  * { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+.carousel {
+  background: #EEE;
+  height: 200px;
+  margin: 100px 0;
+}
+
+.carousel-cell {
+  width: 66%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: gallery-cell;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+
+.a-image {
+  font-family: $font-header;
+  font-size: 22px;
+ text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  transition: 0.7s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+ transform: translate(-50%, -50%);
+
+ :hover a.a-image{
+  top: 50%;
+ }
+}
+.home-container{
+  max-width: 700px;
+  margin: auto;
+}
