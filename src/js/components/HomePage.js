@@ -1,3 +1,5 @@
+import { templates } from './settings.js';
+
 class HomePage{
   constructor(element){
     const thisHome = this;
@@ -5,11 +7,21 @@ class HomePage{
     thisHome.initWidgets();
   }
 
-  render(){
+  render(element){
    
+    const thisHome = this;
+    const generatedHTML = templates.homePage();
+
+    thisHome.dom = {};
+    thisHome.dom.wrapper = element;
+    thisHome.dom.wrapper.innerHTML = generatedHTML;
+
   }
 
   initWidgets(){
+    
+    //eslint-disable-next-line no-undef
+  
   }
 }
 
