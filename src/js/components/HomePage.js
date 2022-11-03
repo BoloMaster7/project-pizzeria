@@ -1,5 +1,3 @@
-// external js: flickity.pkgd.js
-
 class HomePage{
   constructor(element){
     const thisHome = this;
