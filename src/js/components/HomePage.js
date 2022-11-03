@@ -8,6 +8,7 @@ class HomePage{
   }
 
   render(){
+   
   }
 
   initWidgets(){
