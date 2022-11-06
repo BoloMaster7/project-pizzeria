@@ -72,6 +72,7 @@ export const select = {
   },
   nav: {
     links: '.main-nav a',
+    redirection: '.redirect',
   },
   // CODE ADDED END
 };

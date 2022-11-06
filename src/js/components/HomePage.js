@@ -20,8 +20,17 @@ class HomePage{
 
   initWidgets(){
     
-    //eslint-disable-next-line no-undef
-  
+    //eslint-disable-next-line no-undef 
+    const elem = document.querySelector('.main-carousel');
+    let Flickity;
+    new Flickity( elem, {
+      // options
+      cellAlign: 'left',
+      contain: true,
+      prevNextButtons: false,
+      autoPlay: 3000,
+      wrapAround: true,
+    });
   }
 }
 

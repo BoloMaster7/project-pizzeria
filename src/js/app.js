@@ -109,6 +109,23 @@ const app = {
 
     const homeElem = document.querySelector(select.containerOf.home);
     thisApp.home = new HomePage(homeElem);
+
+
+    thisApp.newLink = document.querySelectorAll(select.nav.redirection);
+
+    for (let link of thisApp.newLink) {
+      link.addEventListener('click', function (event) {
+        const clickedElement = this;
+        event.preventDefault();
+
+        const id = clickedElement.getAttribute('href').replace('#', '');
+
+        thisApp.activatePage(id);
+
+        window.location.hash = '#/' + id;
+      });
+    }
+
   },
 
   init: function () {
