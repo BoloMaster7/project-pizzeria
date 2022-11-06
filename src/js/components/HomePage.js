@@ -22,7 +22,7 @@ class HomePage{
     
     //eslint-disable-next-line no-undef 
     const elem = document.querySelector('.main-carousel');
-    let Flickity;
+    // eslint-disable-next-line no-undef
     new Flickity( elem, {
       // options
       cellAlign: 'left',

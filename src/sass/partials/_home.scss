@@ -25,7 +25,12 @@ img {
   position: relative;
   text-align: center;
   flex-basis: 45%;
+
+  &:hover a {
+    top: 40%;
+  }
 }
+
 section{
   margin: ($base-size) 0;
   padding: ($base-size * 2) 0;
@@ -36,6 +41,7 @@ section{
   width: 100%;
   justify-content: space-between;
 }
+
 .home_nav a{
   display: flex;
   justify-content: center;
@@ -45,19 +51,18 @@ section{
   gap: 5px;
   text-decoration: none;
 }
-.nav_tile{
+
+.nav_title{
   width: 48%;
-  height: $base-size* 10;
+  height: $base-size * 10;
   border-radius: $radius;
   background-size: cover;
   background-position: center;
+
   &_name{
     @extend .h1;
     color: $color-light;
     transition: 0.3s;
-  }
-  &:hover p{
-    top: 50%;
   }
 }
 
@@ -94,7 +99,7 @@ section{
 }
 
 .carousel-cell{
-  height: $base-size *20;
+  height: $base-size * 20;
   display: flex;
 
   &_img-wrapper{
@@ -124,7 +129,6 @@ section{
   height: $base-size * 20;
   position: relative;
   margin: $base-size 1%;
-  position: relative;
 
   &::after{
     content: " ";
@@ -136,6 +140,7 @@ section{
     height: 100%;
     background-color: rgba($color: #000000, $alpha: 0.3);
   }
+
   &:hover::after{
     background-color: rgba($color: #000000, $alpha: 0.5);
   }
@@ -146,6 +151,7 @@ section{
     object-fit: cover;
 
   }
+
   .icons{
     position: absolute;
     transform: translate(-50%, -50%);
@@ -155,7 +161,16 @@ section{
     z-index: 1;
   }
 
-  .fa-heart,
+  .fa-heart{
+    margin: 0 $base-size;
+    font-size: 24px;
+    color: $color-light;
+    opacity: 0;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+
   .fa-share-nodes{
     margin: 0 $base-size;
     font-size: 24px;
@@ -171,6 +186,7 @@ section{
 
   &:hover i{
     opacity: 1;
+    color: red;
   }
 
 }
